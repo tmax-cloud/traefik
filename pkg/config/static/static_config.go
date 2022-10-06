@@ -9,6 +9,7 @@ import (
 	legolog "github.com/go-acme/lego/v4/log"
 	"github.com/sirupsen/logrus"
 	ptypes "github.com/traefik/paerser/types"
+	"github.com/traefik/traefik/v2/pkg/console"
 	"github.com/traefik/traefik/v2/pkg/log"
 	"github.com/traefik/traefik/v2/pkg/ping"
 	acmeprovider "github.com/traefik/traefik/v2/pkg/provider/acme"
@@ -66,9 +67,10 @@ type Configuration struct {
 	EntryPoints      EntryPoints       `description:"Entry points definition." json:"entryPoints,omitempty" toml:"entryPoints,omitempty" yaml:"entryPoints,omitempty" export:"true"`
 	Providers        *Providers        `description:"Providers configuration." json:"providers,omitempty" toml:"providers,omitempty" yaml:"providers,omitempty" export:"true"`
 
-	API     *API           `description:"Enable api/dashboard." json:"api,omitempty" toml:"api,omitempty" yaml:"api,omitempty" label:"allowEmpty" file:"allowEmpty" export:"true"`
-	Metrics *types.Metrics `description:"Enable a metrics exporter." json:"metrics,omitempty" toml:"metrics,omitempty" yaml:"metrics,omitempty" export:"true"`
-	Ping    *ping.Handler  `description:"Enable ping." json:"ping,omitempty" toml:"ping,omitempty" yaml:"ping,omitempty" label:"allowEmpty" file:"allowEmpty" export:"true"`
+	API     *API             `description:"Enable api/dashboard." json:"api,omitempty" toml:"api,omitempty" yaml:"api,omitempty" label:"allowEmpty" file:"allowEmpty" export:"true"`
+	Metrics *types.Metrics   `description:"Enable a metrics exporter." json:"metrics,omitempty" toml:"metrics,omitempty" yaml:"metrics,omitempty" export:"true"`
+	Ping    *ping.Handler    `description:"Enable ping." json:"ping,omitempty" toml:"ping,omitempty" yaml:"ping,omitempty" label:"allowEmpty" file:"allowEmpty" export:"true"`
+	Console *console.Handler `description:"Enable console." json:"console,omitempty" toml:"console,omitempty" yaml:"console,omitempty" label:"allowEmpty" file:"allowEmpty" export:"true"`
 
 	Log       *types.TraefikLog `description:"Traefik log settings." json:"log,omitempty" toml:"log,omitempty" yaml:"log,omitempty" label:"allowEmpty" file:"allowEmpty" export:"true"`
 	AccessLog *types.AccessLog  `description:"Access log settings." json:"accessLog,omitempty" toml:"accessLog,omitempty" yaml:"accessLog,omitempty" label:"allowEmpty" file:"allowEmpty" export:"true"`

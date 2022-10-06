@@ -21,11 +21,12 @@ type InternalHandlers struct {
 	prometheus http.Handler
 	ping       http.Handler
 	acmeHTTP   http.Handler
+	console    http.Handler
 	serviceManager
 }
 
 // NewInternalHandlers creates a new InternalHandlers.
-func NewInternalHandlers(next serviceManager, apiHandler, rest, metricsHandler, pingHandler, dashboard, acmeHTTP http.Handler) *InternalHandlers {
+func NewInternalHandlers(next serviceManager, apiHandler, rest, metricsHandler, pingHandler, dashboard, acmeHTTP, consoleHandler http.Handler) *InternalHandlers {
 	return &InternalHandlers{
 		api:            apiHandler,
 		dashboard:      dashboard,
@@ -33,6 +34,7 @@ func NewInternalHandlers(next serviceManager, apiHandler, rest, metricsHandler, 
 		prometheus:     metricsHandler,
 		ping:           pingHandler,
 		acmeHTTP:       acmeHTTP,
+		console:        consoleHandler,
 		serviceManager: next,
 	}
 }
@@ -94,6 +96,11 @@ func (m *InternalHandlers) get(serviceName string) (http.Handler, error) {
 		}
 		return m.prometheus, nil
 
+	case "console@internal":
+		if m.console == nil {
+			return nil, errors.New("console is not enabled")
+		}
+		return m.console, nil
 	default:
 		return nil, fmt.Errorf("unknown internal service %s", serviceName)
 	}

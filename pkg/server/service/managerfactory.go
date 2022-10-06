@@ -24,6 +24,7 @@ type ManagerFactory struct {
 	metricsHandler   http.Handler
 	pingHandler      http.Handler
 	acmeHTTPHandler  http.Handler
+	consoleHandler   http.Handler
 
 	routinesPool *safe.Pool
 }
@@ -45,6 +46,7 @@ func NewManagerFactory(staticConfiguration static.Configuration, routinesPool *s
 			factory.api = func(configuration *runtime.Configuration) http.Handler {
 				router := apiRouterBuilder(configuration).(*mux.Router)
 				dashboard.Append(router, nil)
+				//dashboard.Append(router, nil)
 				return router
 			}
 		} else {
@@ -67,6 +69,10 @@ func NewManagerFactory(staticConfiguration static.Configuration, routinesPool *s
 		factory.pingHandler = staticConfiguration.Ping
 	}
 
+	if staticConfiguration.Console != nil {
+		factory.consoleHandler = staticConfiguration.Console.CreateRouter()
+	}
+
 	return factory
 }
 
@@ -79,5 +85,5 @@ func (f *ManagerFactory) Build(configuration *runtime.Configuration) *InternalHa
 		apiHandler = f.api(configuration)
 	}
 
-	return NewInternalHandlers(svcManager, apiHandler, f.restHandler, f.metricsHandler, f.pingHandler, f.dashboardHandler, f.acmeHTTPHandler)
+	return NewInternalHandlers(svcManager, apiHandler, f.restHandler, f.metricsHandler, f.pingHandler, f.dashboardHandler, f.acmeHTTPHandler, f.consoleHandler)
 }
