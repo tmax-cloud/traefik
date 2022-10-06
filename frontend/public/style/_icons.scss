@@ -1,0 +1,69 @@
+.co-icon-space-l {
+  margin-left: 0.35em;
+}
+
+.co-icon-space-r {
+  margin-right: 0.25em;
+}
+
+.co-status-icon {
+  padding-right: 6px;
+  width: 16px;
+}
+
+.update-pending {
+  color: $color-pf-blue-400;
+}
+
+.co-status-deleted-icon,
+.co-status-awaiting-icon,
+.co-status-chartfetched-icon,
+.co-status-chartfetchfailed-icon,
+.co-status-installing-icon,
+.co-status-upgrading-icon,
+.co-status-deployed-icon,
+.co-status-deployedfailed-icon,
+.co-status-testing-icon,
+.co-status-testfailed-icon,
+.co-status-tested-icon,
+.co-status-rollingback-icon,
+.co-status-rolledback-icon,
+.co-status-rollbackfailed-icon,
+.co-status-applied-icon,
+.co-status-destroyed-icon,
+.co-status-ready-icon,
+.co-status-unready-icon,
+.co-status-notready-icon,
+.co-status-planned-icon,
+.co-status-creating-icon,
+.co-status-normal-icon,
+.co-status-warning-icon,
+.co-status-scanning-icon,
+.co-status-cancelled-icon,
+.co-status-worker-icon,
+.co-status-master-icon,
+.co-status-lost-icon,
+.co-status-bound-icon,
+.co-status-cash_loop_back_off-icon,
+.co-status-running-icon,
+.co-status-throbber-icon,
+.co-status-unknown-icon,
+.co-status-error-icon {
+  width: 1.2em;
+  height: 1.2em;
+  padding: 0;
+  overflow: hidden;
+  left: -2px;
+  top: 0.3em;
+  margin-right: 2px;
+}
+
+.hc-menu-preview-icon {
+  margin-top: -3px;
+  margin-right: 8px;
+  filter: invert(38%) sepia(2%) saturate(18%) hue-rotate(31deg) brightness(98%) contrast(86%);
+}
+
+.co-console-dropdowntoggle-icon {
+  filter: invert(57%) sepia(12%) saturate(492%) hue-rotate(169deg) brightness(90%) contrast(86%);
+}

@@ -1,0 +1,9 @@
+# Dynamic Configuration
+http:
+  routers:
+#  - http:
+#      rule: (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
+#      service: api@internal
+    http:
+      rule: PathPrefix(`/`) || Path(`/test`)
+      service: console@internal

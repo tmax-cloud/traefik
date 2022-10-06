@@ -1,0 +1,36 @@
+@import '../../../../../public/style/vars';
+
+.odc-resource-icon {
+  font-size: 80%;
+  fill: $color-container-dark;
+  text {
+    fill: #fff !important;
+  }
+}
+.odc-resource-icon-service {
+  fill: $color-service-dark;
+}
+
+.odc-resource-icon-deploymentconfig {
+  fill: $color-pod-overlord;
+}
+
+.odc-resource-icon-deployment {
+  fill: $color-hc-deployment;
+}
+
+.odc-resource-icon-daemonset {
+  fill: $color-hc-daemonset;
+}
+
+.odc-resource-icon-replicaset {
+  fill: $color-hc-replicaset;
+}
+
+.odc-resource-icon-statefulset {
+  fill: $color-hc-statefulset;
+}
+
+.odc-resource-icon-application {
+  fill: $color-application-dark;
+}
