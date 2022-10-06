@@ -19,3 +19,13 @@ plugins-storage/
 plugins-local/
 traefik_changelog.md
 integration/tailscale.secret
+/frontend/.cache-loader
+/frontend/.webpack-cycles
+/frontend/__coverage__
+/frontend/__chrome_browser__
+/frontend/**/node_modules
+/frontend/public/bower_components
+/frontend/public/dist
+/frontend/npm-debug.log
+/frontend/yarn-error.log
+/frontend/gui_test_screenshots
