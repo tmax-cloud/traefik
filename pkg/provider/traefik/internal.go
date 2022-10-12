@@ -73,6 +73,7 @@ func (i *Provider) createConfiguration(ctx context.Context) *dynamic.Configurati
 
 	i.apiConfiguration(cfg)
 	i.pingConfiguration(cfg)
+	i.consoleConfiguration(cfg)
 	i.restConfiguration(cfg)
 	i.prometheusConfiguration(cfg)
 	i.entryPointModels(cfg)
@@ -275,6 +276,14 @@ func (i *Provider) pingConfiguration(cfg *dynamic.Configuration) {
 	}
 
 	cfg.HTTP.Services["ping"] = &dynamic.Service{}
+}
+
+func (i *Provider) consoleConfiguration(cfg *dynamic.Configuration) {
+	if i.staticCfg.Console == nil {
+		return
+	}
+
+	cfg.HTTP.Services["console"] = &dynamic.Service{}
 }
 
 func (i *Provider) restConfiguration(cfg *dynamic.Configuration) {

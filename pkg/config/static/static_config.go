@@ -70,7 +70,7 @@ type Configuration struct {
 	API     *API             `description:"Enable api/dashboard." json:"api,omitempty" toml:"api,omitempty" yaml:"api,omitempty" label:"allowEmpty" file:"allowEmpty" export:"true"`
 	Metrics *types.Metrics   `description:"Enable a metrics exporter." json:"metrics,omitempty" toml:"metrics,omitempty" yaml:"metrics,omitempty" export:"true"`
 	Ping    *ping.Handler    `description:"Enable ping." json:"ping,omitempty" toml:"ping,omitempty" yaml:"ping,omitempty" label:"allowEmpty" file:"allowEmpty" export:"true"`
-	Console *console.Handler `description:"Enable console." json:"console,omitempty" toml:"console,omitempty" yaml:"console,omitempty" label:"allowEmpty" file:"allowEmpty" export:"true"`
+	Console *console.Console `description:"Enable console." json:"console,omitempty" toml:"console,omitempty" yaml:"console,omitempty" label:"allowEmpty" file:"allowEmpty" export:"true"`
 
 	Log       *types.TraefikLog `description:"Traefik log settings." json:"log,omitempty" toml:"log,omitempty" yaml:"log,omitempty" label:"allowEmpty" file:"allowEmpty" export:"true"`
 	AccessLog *types.AccessLog  `description:"Access log settings." json:"accessLog,omitempty" toml:"accessLog,omitempty" yaml:"accessLog,omitempty" label:"allowEmpty" file:"allowEmpty" export:"true"`

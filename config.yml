@@ -1,9 +1,17 @@
 # Dynamic Configuration
 http:
   routers:
-#  - http:
-#      rule: (PathPrefix(`/api`) || PathPrefix(`/dashboard`))
-#      service: api@internal
-    http:
-      rule: PathPrefix(`/`) || Path(`/test`)
+    dashboard:
+      entryPoints:
+        - traefik
+      rule: PathPrefix(`/`) || PathPrefix(`/api`) || PathPrefix(`/dashboard`)
+      service: api@internal
+    console:
+      entryPoints:
+        - web
+        - websecure
+      rule: PathPrefix(`/`) || PathPrefix(`/static`)
       service: console@internal
+  serversTransports:
+    insecureskip:
+      insecureSkipVerify: true

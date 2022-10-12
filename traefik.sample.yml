@@ -23,14 +23,18 @@ global:
 #
 entryPoints:
   web:
-    address: :8080
+    address: :9080
 
   websecure:
-    address: :443
+    address: :9443
+    http:
+      tls: true
 
   traefik:
-    address: :9000
+    address: :9090
 
+serversTransport:
+  insecureSkipVerify: true
   ################################################################
   # Traefik logs configuration
   ################################################################
@@ -40,13 +44,14 @@ entryPoints:
   #
   # Optional
   #
-  #log:
+log:
+  level: DEBUG
   # Log level
   #
   # Optional
   # Default: "ERROR"
   #
-  #  level: DEBUG
+  # level: DEBUG
 
   # Sets the filepath for the traefik log. If not specified, stdout will be used.
   # Intermediate directories are created if necessary.
@@ -73,7 +78,7 @@ entryPoints:
   #
   # Optional
   #
-  #accessLog:
+accessLog:
   # Sets the file path for the access log. If not specified, stdout will be used.
   # Intermediate directories are created if necessary.
   #
@@ -111,6 +116,7 @@ api:
   # Default: true
   #
   dashboard: true
+  insecure: true
 
 ################################################################
 # Ping configuration
@@ -159,3 +165,4 @@ console:
   chatbotEmbed: false
   mcMode: true
   customProductName: "hypercloud"
+  keycloakAuthURL: "https://hyperauth.tmaxcloud.org/auth"
