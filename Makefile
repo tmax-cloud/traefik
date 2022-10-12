@@ -77,6 +77,18 @@ webui/static/index.html:
 .PHONY: generate-webui
 generate-webui: webui/static/index.html
 
+## Clean ConsoleUI static generated assets
+.PHONY: clean-consoleui
+clean-consoleui:
+	rm -r frontend/static
+	mkdir -p frontend/static
+	printf 'For more information see `frontend/readme.md`' > frontend/static/DONT-EDIT-FILES-IN-THIS-DIRECTORY.md
+
+.PHONY: generate-consoleui
+generate-consoleui:
+	docker pull tmaxcloudck/hypercloud-console:5.0.82.3
+	docker run --rm -v "$(PWD)/frontend":'/opt/bridge/configs' tmaxcloudck/hypercloud-console:5.0.82.3 cp -r static/ configs/
+
 ## Build the binary
 .PHONY: binary
 binary: generate-webui build-dev-image
