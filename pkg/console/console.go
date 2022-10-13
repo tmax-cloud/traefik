@@ -53,17 +53,16 @@ func (c *Console) SetDefaults() {
 	c.KubeAPIServerURL = kubeAPIServerURL
 }
 
+// func (c *Console) CreateRouter() http.Handler {
 func (c *Console) CreateRouter() *mux.Router {
-
 	router := mux.NewRouter()
+
+	// Serving Ingress Info (using proxy)
 
 	// Serving SPA
 	router.
 		PathPrefix(staticFileEndpoint).
 		Handler(http.StripPrefix(staticFileEndpoint, gzipHandler(http.FileServer(http.FS(frontend.FS)))))
-	//HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-	//	http.StripPrefix(staticFileEndpoint, gzipHandler(http.FileServer(http.FS(frontend.FS))))
-	//})
 
 	// serving index.html with index values as json format
 	index := &Index{
