@@ -1,7 +1,9 @@
 package console
 
 import (
+	"encoding/json"
 	"github.com/traefik/traefik/v2/frontend"
+	"github.com/traefik/traefik/v2/pkg/log"
 	"html/template"
 	"net/http"
 )
@@ -31,9 +33,20 @@ type Index struct {
 	SvcType string `json:"svcType"`
 }
 
-func (index Index) indexHandler(w http.ResponseWriter, r *http.Request) {
+// the function that return http response containing json body of Console struct
+func (index Index) jsonHandler(w http.ResponseWriter, req *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	err := json.NewEncoder(w).Encode(index)
+	if err != nil {
+		log.FromContext(req.Context()).Warnf("Could not Encode json %s", req.Host)
+	}
+
+}
+
+func (index Index) htmlHandler(w http.ResponseWriter, r *http.Request) {
 	tpl := template.New(indexPageTemplateName)
-	tpl.Delims("[[", "]]")
+	//tpl.Delims("[[", "]]")
 	tpls, err := tpl.ParseFS(frontend.FS, indexPageTemplateName)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)

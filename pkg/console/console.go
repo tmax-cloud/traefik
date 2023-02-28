@@ -22,9 +22,10 @@ const (
 	keycloakClientId = "hypercloud5"
 
 	consoleBasePath    = "/"
+	indexJsonEndpoint  = "/index.json"
 	staticFileEndpoint = "/static/"
 
-	kubeAPIServerURL = "kubernetes.default.svc"
+	kubeAPIServerURL = "https://kubernetes.default.svc"
 )
 
 type Console struct {
@@ -39,6 +40,7 @@ type Console struct {
 	KeycloakClientId string `description:"keycloak cliend id" yaml:"keycloakClientId" json:"keycloakClientId" toml:"keycloakClientId" export:"true"`
 
 	KubeAPIServerURL string `description:"kube API URL" json:"kubeAPIServerURL" yaml:"kubeAPIServerURL" toml:"kubeAPIServerURL" export:"true"`
+	KubeToken        string `description:"Kube Token" json:"kubeToken" yaml:"kubeToken" toml:"kubeToken" export:"true"`
 }
 
 // SetDefaults sets the default values.
@@ -58,6 +60,14 @@ func (c *Console) CreateRouter() *mux.Router {
 	router := mux.NewRouter()
 
 	// Serving Ingress Info (using proxy)
+	k8sProxy := NewK8sHandlerConfig(c.KubeAPIServerURL, c.KubeToken)
+	router.Methods(http.MethodGet).
+		PathPrefix("/api/v1").
+		HandlerFunc(k8sProxy.proxyHandler)
+
+	router.Methods(http.MethodGet).
+		PathPrefix("/apis/networking.k8s.io").
+		HandlerFunc(k8sProxy.proxyHandler)
 
 	// Serving SPA
 	router.
@@ -83,9 +93,16 @@ func (c *Console) CreateRouter() *mux.Router {
 		ChatbotEmbed:      c.ChatbotEmbed,
 		CustomProductName: c.CustomProductName,
 	}
+
+	// serving index values as json format
+	router.Methods(http.MethodGet).
+		PathPrefix(indexJsonEndpoint).
+		HandlerFunc(index.jsonHandler)
+
+	// serving index.html
 	router.Methods(http.MethodGet).
 		PathPrefix(consoleBasePath).
-		HandlerFunc(index.indexHandler)
+		HandlerFunc(index.htmlHandler)
 
 	return router
 }

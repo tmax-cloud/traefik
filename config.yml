@@ -10,8 +10,27 @@ http:
       entryPoints:
         - web
         - websecure
-      rule: PathPrefix(`/`) || PathPrefix(`/static`)
+      rule: PathPrefix(`/`) || PathPrefix(`/static`) || PathPrefix(`/api`)
+#      middlewares:
+#        - my-plugin
+#        - my-traefik-auth-middleware
       service: console@internal
   serversTransports:
     insecureskip:
       insecureSkipVerify: true
+
+  middlewares:
+    my-plugin:
+      plugin:
+        example:
+          headers:
+            Foo: Bar
+
+    my-traefik-auth-middleware:
+      plugin:
+        traefik-auth-middleware:
+          IAM:
+            ClientId: "test-traefik"
+            PasswordQueryParamName: "admin"
+            Url: https://hyperauth.tmaxcloud.org/auth/token
+            UserQueryParamName: "admin@tmax.co.kr"

@@ -23,10 +23,10 @@ global:
 #
 entryPoints:
   web:
-    address: :9080
+    address: :8080
 
   websecure:
-    address: :9443
+    address: :8443
     http:
       tls: true
 
@@ -166,3 +166,17 @@ console:
   mcMode: true
   customProductName: "hypercloud"
   keycloakAuthURL: "https://hyperauth.tmaxcloud.org/auth"
+  kubeAPIServerURL: "https://192.168.9.189:6443"
+  kubeToken: "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIweDlKOVJkSTJyMFJMSlRxcTVDSXl6STVsQ1lvTUNhSGk2NnNnWHJhZlZBIn0.eyJleHAiOjE2Nzc1NzQ2ODUsImlhdCI6MTY3NzU3MTA4NSwiYXV0aF90aW1lIjowLCJqdGkiOiI1MGM4NzUwNy1iODhiLTQ4NWItOWFjYS1mODhkNGE1MjQwMzUiLCJpc3MiOiJodHRwczovL2h5cGVyYXV0aC50bWF4Y2xvdWQub3JnL2F1dGgvcmVhbG1zL3RtYXgiLCJhdWQiOiJoeXBlcmNsb3VkNSIsInN1YiI6IjM2NjM1YWU3LWZhMjctNDM5OS04NDJhLWUwNDRmMWE0YTZhNCIsInR5cCI6IklEIiwiYXpwIjoiaHlwZXJjbG91ZDUiLCJzZXNzaW9uX3N0YXRlIjoiMjI5YWI0YmEtZDA0Ny00YjE2LWE1NDAtZDdmNjkxZTY3MWIyIiwiYXRfaGFzaCI6Ii1Bb0JTbkFwNVo3bmVNNm9kVWJ5NGciLCJhY3IiOiIxIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6ImhjLWFkbWluQHRtYXguY28ua3IiLCJoeXBlcmNsb3VkNSI6WyIvYXJnb2NkLWFkbWluIiwiL2h5cGVyY2xvdWQ1Il0sImVtYWlsIjoiaGMtYWRtaW5AdG1heC5jby5rciIsImdyb3VwIjpbImFyZ29jZC1hZG1pbiIsImh5cGVyY2xvdWQ1Il19.Ch8BRjdPsgRyxLxrZ4W0uu4t9mtftJu2AAcBRWS1wKYRMjRemX0M6dEm139YoIfMC16tW-8_N21DRlnhyogjGtLeCsSpqgIS0ftgi_d70UItm1_hLEIJAo-5xLqbN1M1WQHfEsv4nFurk5kX2g6qU2d3vQHqtqoQT3VF_b2bffRL0_f3WHec1W0Vvf0eImS8X2Qox4YK1gup_94xYW5fvkytewFWuf7rlZZ_TANj7u1dGHpmonrN50TfuNvLT2GIJ89qoTXBgdEPOMr-7Lc2XxkpCx8ZCHxRjwAlwsoJu9ew7OH605OdJLuT5wv1815kkZAgxbN2_znGqT638eKyYg"
+
+
+
+experimental:
+  localPlugins:
+    example:
+      moduleName: github.com/traefik/plugindemo
+
+  plugins:
+    traefik-auth-middleware:
+      moduleName: "github.com/ZeroGachis/traefik-auth-middleware"
+      version: "v0.0.7"
